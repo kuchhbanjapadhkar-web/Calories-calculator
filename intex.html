@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calories Calculator</title>
+<style>
+  body{
+    margin:0;
+    font-family:sans-serif;
+    background:#f0f4f8;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    padding:10px
+  }
+  .ad{
+    width:100%;
+    max-width:400px;
+    height:90px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:5px 0;
+    border-radius:6px;
+  }
+  .calculator{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    width:100%;
+    max-width:400px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  input, select, button{
+    width:100%;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:16px;
+  }
+  button{
+    background:#3b82f6;
+    color:white;
+    border:none;
+    cursor:pointer;
+  }
+  .result{
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
+    margin-top:10px;
+  }
+  /* Page-load ad container */
+  #pageLoadAd{
+    width:100%;
+    max-width:400px;
+    height:250px;
+    margin:10px auto;
+  }
+</style>
+
+<!-- AdSense Script -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+<body>
+
+<!-- Top Banner Ad -->
+<div class="ad">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-2682755409037931"
+       data-ad-slot="8460866645"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- Page-load Ad (Center) -->
+<div id="pageLoadAd">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-2682755409037931"
+       data-ad-slot="4477497400"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+</div>
+
+<script>
+  // Push page-load ad on window load
+  window.addEventListener('load', ()=>{
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  });
+</script>
+
+<!-- Calculator -->
+<div class="calculator">
+  <input type="number" id="age" placeholder="Age (saal)">
+  <select id="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+  <input type="number" id="weight" placeholder="Weight (kg)">
+  <input type="number" id="height" placeholder="Height (cm)">
+  <select id="activity">
+    <option value="1.2">Sedentary exerise</option>
+    <option value="1.375">Light exerise</option>
+    <option value="1.55">Moderate exerise</option>
+    <option value="1.725">Active exerise</option>
+    <option value="1.9">extrem exerise</option>
+  </select>
+  <button id="calcBtn">Calculate</button>
+  <div class="result" id="result"></div>
+</div>
+
+<!-- Bottom Banner Ad -->
+<div class="ad">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-2682755409037931"
+       data-ad-slot="4477497400"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<script>
+  // Calculator logic
+  const btn=document.getElementById('calcBtn');
+  const res=document.getElementById('result');
+  btn.onclick=()=>{
+    const age=parseInt(document.getElementById('age').value);
+    const gender=document.getElementById('gender').value;
+    const weight=parseFloat(document.getElementById('weight').value);
+    const height=parseFloat(document.getElementById('height').value);
+    const act=parseFloat(document.getElementById('activity').value);
+    if(!age||!weight||!height){res.textContent="Please fill all fields!"; return;}
+    let bmr=gender==="male"?10*weight+6.25*height-5*age+5:10*weight+6.25*height-5*age-161;
+    const calories=Math.round(bmr*act);
+    res.textContent=`Daily Calories: ${calories} kcal`;
+  }
+</script>
+
+</body>
+  </html>
