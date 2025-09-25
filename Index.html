@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Calories Calculator</title>
+
+<style>
+  :root{
+    --bg:#000; /* pura black */
+    --card:#111;
+    --accent:#3b82f6;
+    --blackkey:#222;
+    --keyshadow: rgba(0,0,0,0.5);
+    --text:#fff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    background:var(--bg);
+    font-family:Arial, sans-serif;
+    color:var(--text);
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:10px;
+  }
+
+  .wrap{
+    width:100%;
+    max-width:600px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+  }
+
+  .card{
+    background:var(--card);
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.4);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .card h2{margin:0;font-size:20px;text-align:center}
+
+  label{font-size:13px;display:block;margin-bottom:4px}
+  input, select{
+    width:100%;
+    padding:10px 12px;
+    border-radius:8px;
+    border:1px solid #333;
+    font-size:15px;
+    background:#000;
+    color:#fff;
+  }
+
+  .btn{
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    background:var(--accent);
+    color:#fff;
+    margin-top:8px;
+  }
+
+  .result{
+    margin-top:8px;
+    text-align:center;
+    font-weight:700;
+    font-size:18px;
+    color:#4ade80; /* greenish */
+  }
+
+  /* Full keyboard */
+  .keyboard-wrap{
+    background:#000;
+    border-radius:8px;
+    padding:8px;
+  }
+  .kbd-row{
+    display:flex;
+    gap:6px;
+    margin-bottom:6px;
+    justify-content:center;
+  }
+  .key{
+    background:var(--blackkey);
+    border-radius:6px;
+    padding:16px 0;
+    flex:1;
+    text-align:center;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow: 0 2px 6px var(--keyshadow);
+    color:#fff;
+    user-select:none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .key:active{background:#444}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- 🔥 Top Ad -->
+  <div style="display:flex;justify-content:center;margin:10px 0;">
+    <script type="text/javascript">
+      atOptions = {
+        'key' : 'fd1dfc3dca297cc3fc5b95f84cfa9fbc',
+        'format' : 'iframe',
+        'height' : 250,
+        'width' : 300,
+        'params' : {}
+      };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/fd1dfc3dca297cc3fc5b95f84cfa9fbc/invoke.js"></script>
+  </div>
+
+  <div class="card">
+    <h2>Calories Calculator</h2>
+
+    <label>Age (saal)</label>
+    <input id="age" type="number" placeholder="e.g. 25">
+
+    <label>Gender</label>
+    <select id="gender">
+      <option value="">--Select--</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+
+    <label>Weight (kg)</label>
+    <input id="weight" type="number" placeholder="e.g. 70">
+
+    <label>Height (cm)</label>
+    <input id="height" type="number" placeholder="e.g. 175">
+
+    <label>Activity Level</label>
+    <select id="activity">
+      <option value="1.2">Sedentary (1.2)</option>
+      <option value="1.375">Light (1.375)</option>
+      <option value="1.55">Moderate (1.55)</option>
+      <option value="1.725">Active (1.725)</option>
+      <option value="1.9">Extreme (1.9)</option>
+    </select>
+
+    <button class="btn" id="calcBtn">Calculate</button>
+    <div class="result" id="result">—</div>
+  </div>
+
+  <!-- 🔥 Bottom Ad -->
+  <div style="display:flex;justify-content:center;margin:10px 0;">
+    <script type="text/javascript">
+      atOptions = {
+        'key' : 'fd1dfc3dca297cc3fc5b95f84cfa9fbc',
+        'format' : 'iframe',
+        'height' : 250,
+        'width' : 300,
+        'params' : {}
+      };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/fd1dfc3dca297cc3fc5b95f84cfa9fbc/invoke.js"></script>
+  </div>
+
+  <!-- Big Keyboard -->
+  <div class="keyboard-wrap">
+    <div class="kbd-row">
+      <div class="key">7</div>
+      <div class="key">8</div>
+      <div class="key">9</div>
+    </div>
+    <div class="kbd-row">
+      <div class="key">4</div>
+      <div class="key">5</div>
+      <div class="key">6</div>
+    </div>
+    <div class="kbd-row">
+      <div class="key">1</div>
+      <div class="key">2</div>
+      <div class="key">3</div>
+    </div>
+    <div class="kbd-row">
+      <div class="key">0</div>
+      <div class="key">.</div>
+      <div class="key">←</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let activeInput = null;
+
+// Focused input track
+document.querySelectorAll("input").forEach(inp=>{
+  inp.addEventListener("focus", ()=> activeInput=inp);
+});
+document.querySelectorAll("select").forEach(sel=>{
+  sel.addEventListener("focus", ()=> activeInput=null);
+});
+
+// Keyboard click
+document.querySelectorAll(".key").forEach(key=>{
+  key.addEventListener("click", ()=>{
+    if(!activeInput) return;
+    const val=key.textContent;
+    if(val==="←"){
+      activeInput.value = activeInput.value.slice(0,-1);
+    } else {
+      activeInput.value += val;
+    }
+  });
+});
+
+// Calculator
+document.getElementById("calcBtn").onclick=()=>{
+  const age=parseInt(document.getElementById("age").value);
+  const gender=document.getElementById("gender").value;
+  const weight=parseFloat(document.getElementById("weight").value);
+  const height=parseFloat(document.getElementById("height").value);
+  const act=parseFloat(document.getElementById("activity").value);
+
+  if(!age||!gender||!weight||!height){
+    document.getElementById("result").textContent="⚠️ Please fill all fields";
+    return;
+  }
+  let bmr = gender==="male"
+    ? (10*weight + 6.25*height - 5*age + 5)
+    : (10*weight + 6.25*height - 5*age - 161);
+  const calories=Math.round(bmr*act);
+
+  document.getElementById("result").textContent = 
+    `✅ You need about ${calories} calories per day to maintain your weight.`;
+};
+</script>
+
+</body>
+        </html>
